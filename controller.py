@@ -4,8 +4,7 @@ def start():
     view.greetings()
     while True:
         view.menu()
-        answer = input('Выберите нужную вам команду и введите соответствующую цифру: ')
-        print()
+        answer = input("Выберете нужную вам команду и введите соответствующую цифру: ")
         if answer == '1':
             data = model.storage()
             view.show_contacts(data)
@@ -21,24 +20,17 @@ def start():
             res = model.finder(contact)
             view.show_contacts(res)
         elif answer == '4':
-            contact = input("Введите данные для поиска контакта, который требуется изменить: ")
-            res = model.finder(contact)
+            contact_change = input("Введите данные для изменения: ")
+            res = model.finder(contact_change)
             view.show_contacts(res)
-            contact_change = input("Введите новые данные для изменения: ")
-            res_change = model.changer(contact_change)
-            if res_change: 
-                view.success(res)
-            else: 
-                view.not_success(res)
+
         elif answer == '5':
-            contact = input("Введите данные контакта, который требуется удалить: ")
-            res = model.delete_cont(contact)
+            contact_delete = input("Введите данные для удаления ")
+            res = model.finder(contact_delete)
             view.show_contacts(res)
-            if res: 
-                view.success(res)
-            else: 
-                view.not_success(res)
+            pass 
         elif answer == '6':
+            contact_delete = input("Выход")
             view.ciao()
         else:
             view.error()
