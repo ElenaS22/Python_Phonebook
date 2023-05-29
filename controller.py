@@ -4,43 +4,39 @@ def start():
     view.greetings()
     while True:
         view.menu()
-        answer = input('Выберите нужную вам команду и введите соответствующую цифру: ')
-        print()
+        answer = input("Выберете нужную вам команду и введите соответствующую цифру: ")
         if answer == '1':
             data = model.storage()
             view.show_contacts(data)
         elif answer == '2':
-            contact = input("Введите данные, которые нужно добавить: ")
-            res = model.add_contact(contact)
+            choice = int(input("Вы хотите добавить пользователя? Выберите 1, если да и 2, если нет "))
+            res = model.add_contact(choice)
             if res: 
                 view.success(res)
             else: 
                 view.not_success(res)
         elif answer == '3':
-            contact = input("Введите данные для поиска: ")
-            res = model.finder(contact)
-            view.show_contacts(res)
+            choice = input('Введите фамилию, имя или номер телефона искомого контакта: ')
+            res = model.finder(choice)
         elif answer == '4':
-            contact = input("Введите данные для поиска контакта, который требуется изменить: ")
-            res = model.finder(contact)
-            view.show_contacts(res)
-            contact_change = input("Введите новые данные для изменения: ")
-            res_change = model.changer(contact_change)
-            if res_change: 
+            contact_tochange = input("Введите данные, которые хотите изменить: ")
+            res = model.changer(contact_tochange)
+            if res: 
                 view.success(res)
             else: 
                 view.not_success(res)
         elif answer == '5':
-            contact = input("Введите данные контакта, который требуется удалить: ")
-            res = model.delete_cont(contact)
-            view.show_contacts(res)
+            contact_delete = input("Введите данные пользователя для поиска и удаления ")
+            res = model.delete_cont(contact_delete)
             if res: 
                 view.success(res)
             else: 
                 view.not_success(res)
         elif answer == '6':
             view.ciao()
+            break
         else:
+            print()
             view.error()
         
 
