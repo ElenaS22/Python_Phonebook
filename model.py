@@ -1,57 +1,42 @@
 import controller 
-import shutil
 
 def storage(): #показать все контакты
-    with open('data_file.txt', 'r', encoding='utf-8') as data:
+    with open('data_file.txt', 'a+', encoding='utf-8') as data:
         return data
     
-def add_contact(contact): #добавить контакт
-    #return None
-    with open('data_file.txt', 'a',  encoding='utf8') as data_file:
-        data_file.write(f'{contact}\n')
-    return contact
-
-def finder(contact): #найти контакт
-    contact = input("Введите данные для поиска пользователя")
+def add_contact(choice): #добавить контакт
+    while choice == 1:
+        with open('data_file.txt', 'a',  encoding='utf8') as data_file:
+            print('Укажите данные для добавления')
+            surname = input('Фамилия: ')
+            name = input('Имя: ')
+            tel_num = input('Телефон: ')
+            data_file.writelines(f'{surname} {name} номер телефона {tel_num}\n')
+            return choice
+    
+def finder(choice): #найти контакт
     with open('data_file.txt', 'r', encoding='utf-8') as data:
-        match contact:
-            case 1:
-                name_finder = input("Введите ФИО пользователя: ")
-                for values in data:
-                    if data[values] == name_finder:
-                        print(data[values])
-            case 2:
-                phone_finder = input("Введите ФИО пользователя: ")
-                for values in data:
-                    if data[values] == phone_finder:
-                        print(data[values])
-
-
-
-def changer(contact_change): #изменить данные 
-    contact_change = input("Введите данные для изменения пользователя")
-    with open('data_file.txt', 'w', encoding='utf-8') as data:
-        match contact_change:
-                    case 1:
-                        name_finder = input("Введите пользователя которого требуются изменения: ")
-                        for values in data:
-                            if data[values] == name_finder:
-                                print(data[values])
-                    case 2:
-                        phone_finder = input("Введите номер пользователя на который нужно изменить: ")
-                        for values in data:
-                            if data[values] == phone_finder:
-                                print(data[values])
-
-    return(contact_change)
-
+        users = data.read().splitlines()
+        for values in users:
+            if choice in values:
+                print(f'\n {values} \n')
+    return choice
+   
+def changer(contact_tochange): #изменить данные 
+    changes = input('Введите новые данные: ')
+    with open('data_file.txt', 'rt', encoding='utf-8') as data:
+        users = data.read() 
+        new_users = users.replace(contact_tochange, changes,1)
+    with open('data_file.txt', 'wt', encoding='utf-8') as data:
+        data.writelines(f'{new_users}\n')
+    return contact_tochange
 
 def delete_cont(contact_delete): #удалить контакт
-    contact_delete = input("Введите данные для удаление пользователя")
-    shutil.rmtree(contact_delete)
-     
-    return contact_delete
-
-
-# if __name__ == "__main__":
-#     storage()
+    with open('data_file.txt', 'r+', encoding='utf-8') as data:
+        users = data.read().splitlines()
+    with open('data_file.txt', 'wt', encoding='utf-8') as data:    
+        for values in users:
+            if contact_delete not in values:
+                data.writelines(f'{values}\n')
+                print(f'удалено {contact_delete}')
+        return contact_delete

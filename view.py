@@ -27,10 +27,16 @@ def not_success(res): # показать , что контакт не найде
       print("Операция провалена!\n")
 
 def ciao():
+    print()
     print("До свидания!\n")
 
 def error():
    return print("Упс, что-то пошло не так! \n")
+
+
+        
+   
+
 
    
 

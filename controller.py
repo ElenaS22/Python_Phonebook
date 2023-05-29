@@ -9,30 +9,34 @@ def start():
             data = model.storage()
             view.show_contacts(data)
         elif answer == '2':
-            contact = input("Введите данные, которые нужно добавить: ")
-            res = model.add_contact(contact)
+            choice = int(input("Вы хотите добавить пользователя? Выберите 1, если да и 2, если нет "))
+            res = model.add_contact(choice)
             if res: 
                 view.success(res)
             else: 
                 view.not_success(res)
         elif answer == '3':
-            contact = input("Введите данные для поиска: ")
-            res = model.finder(contact)
-            view.show_contacts(res)
+            choice = input('Введите фамилию, имя или номер телефона искомого контакта: ')
+            res = model.finder(choice)
         elif answer == '4':
-            contact_change = input("Введите данные для изменения: ")
-            res = model.finder(contact_change)
-            view.show_contacts(res)
-
+            contact_tochange = input("Введите данные, которые хотите изменить: ")
+            res = model.changer(contact_tochange)
+            if res: 
+                view.success(res)
+            else: 
+                view.not_success(res)
         elif answer == '5':
-            contact_delete = input("Введите данные для удаления ")
-            res = model.finder(contact_delete)
-            view.show_contacts(res)
-            pass 
+            contact_delete = input("Введите данные пользователя для поиска и удаления ")
+            res = model.delete_cont(contact_delete)
+            if res: 
+                view.success(res)
+            else: 
+                view.not_success(res)
         elif answer == '6':
-            contact_delete = input("Выход")
             view.ciao()
+            break
         else:
+            print()
             view.error()
         
 
